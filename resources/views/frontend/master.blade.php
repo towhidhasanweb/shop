@@ -59,7 +59,7 @@
         
         <!-- header_section - start
         ================================================== -->
-        <header class="header_section header-style-no-collapse">
+        <header class="header_section {{ Route::CurrentRouteName() == 'index'? 'header-style-no-collapse':'header-style-3'}}">
             <div class="header_top">
                 <div class="container">
                     <div class="row align-items-center">
@@ -151,7 +151,7 @@
                                     <svg role="img" xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 24 24" aria-labelledby="statsIconTitle" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" color="#000"> <title id="statsIconTitle">Stats</title> <path d="M6 7L15 7M6 12L18 12M6 17L12 17"/> </svg>
                                     Browse categories
                                 </button>
-                                <div class="allcategories_collapse" id="allcategories_collapse">
+                                <div class="allcategories_collapse {{ Route::CurrentRouteName() == 'index'? '':'collapse'}}" id="allcategories_collapse">
                                     <div class="card card-body">
                                         <ul class="allcategories_list ul_li_block">
                                             @foreach (App\Models\Category::all() as $category)
@@ -172,7 +172,7 @@
                                         <i class="fal fa-times"></i>
                                     </button>
                                     <ul class="main_menu_list ul_li">
-                                        <li><a class="nav-link" href="#">Home</a></li>
+                                        <li><a class="nav-link" href="{{route('index')}}">Home</a></li>
                                         <li><a class="nav-link" href="#">About us</a></li>
                                         <li><a class="nav-link" href="#">Shop</a></li>
                                         <li><a class="nav-link" href="#">Contact Us</a></li>

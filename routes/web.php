@@ -71,3 +71,4 @@ Route::post('/edit-inventory-store', [ProductController::class, 'edit_inventory_
 
 // Frontend 
 Route::get('/home', [Frontendcontroller::class, 'frontend_view'])->name('index');
+Route::get('/product/details/{product_slug}', [Frontendcontroller::class, 'product_details'])->name('product.details');

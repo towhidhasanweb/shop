@@ -139,8 +139,8 @@
                                             @endif
                                         </div>
                                         <div class="details">
-                                            <h4><a href="#">{{$products->product_name}}</a></h4>
-                                            <p><a href="#">{{$products->short_desc}}</a></p>
+                                            <h4><a href="{{route('product.details', $products->slug)}}">{{$products->product_name}}</a></h4>
+                                            <p><a href="{{route('product.details', $products->slug)}}">{{$products->short_desc}}</a></p>
                                             <div class="rating">
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
@@ -184,7 +184,7 @@
                                     @foreach($category_info as $category)
                                         <div class="slider_item">
                                             <div class="category_boxed">
-                                                <a href="#!">
+                                                <a href="#">
                                                     <span class="item_image">
                                                         <img src="{{asset('upload/category')}}/{{$category->category_image}}" alt="image_not_found">
                                                     </span>
@@ -515,18 +515,19 @@
                         
                         <div class="col col-lg-7">
                             <div class="new-arrivals-grids clearfix">
+                                @foreach($new_products as $newproduct)
                                 <div class="grid">
                                     <div class="product-pic">
-                                        <img src="{{asset('frontend/images/shop/product-img-28.png')}}" alt>
+                                        <img src="{{asset('upload/product/thumbnails')}}/{{$newproduct->thumbnails}}" alt>
                                     </div>
                                     <div class="details">
-                                        <h4><a href="#">iPhone 13 pro</a></h4>
-                                        <p><a href="#">A dramatically more powerful camera system a display</a></p>
+                                        <h4><a href="#">{{$newproduct->product_name}}</a></h4>
+                                        <p><a href="#">{{$newproduct->short_desc}}</a></p>
                                         <span class="price">
                                             <ins>
                                                 <span class="woocommerce-Price-amount amount">
                                                     <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>471.48
+                                                        <span class="woocommerce-Price-currencySymbol">TK </span>{{$newproduct->after_discount}}
                                                     </bdi>
                                                 </span>
                                             </ins>
@@ -536,94 +537,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="grid">
-                                    <div class="product-pic">
-                                        <img src="{{asset('frontend/images/shop/product-img-26.png')}}" alt>
-                                        <span class="theme-badge-2">20% off</span>
-                                    </div>
-                                    <div class="details">
-                                        <h4><a href="#">Apple</a></h4>
-                                        <p><a href="#">Apple MacBook Pro13.3″ Laptop with Touch bar ID </a></p>
-                                        <span class="price">
-                                            <ins>
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>471.48
-                                                    </bdi>
-                                                </span>
-                                            </ins>
-                                            <del aria-hidden="true">
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>904.21
-                                                    </bdi>
-                                                </span>
-                                            </del>
-                                        </span>
-                                        <div class="add-cart-area">
-                                            <button class="add-to-cart">Add to cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid">
-                                    <div class="product-pic">
-                                        <img src="{{asset('frontend/images/shop/product-img-27.png')}}" alt>
-                                        <span class="theme-badge-2">15% off</span>
-                                        
-                                    </div>
-                                    <div class="details">
-                                        <h4><a href="#">Mac Mini</a></h4>
-                                        <p><a href="#">Apple MacBook Pro13.3″ Laptop with Touch ID </a></p>
-                                        <span class="price">
-                                            <ins>
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>471.48
-                                                    </bdi>
-                                                </span>
-                                            </ins>
-                                            <del aria-hidden="true">
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>904.21
-                                                    </bdi>
-                                                </span>
-                                            </del>
-                                        </span>
-                                        <div class="add-cart-area">
-                                            <button class="add-to-cart">Add to cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid">
-                                    <div class="product-pic">
-                                        <img src="{{asset('frontend/images/shop/product_img_12.png')}}" alt>
-                                        <span class="theme-badge">Sale</span>
-                                    </div>
-                                    <div class="details">
-                                        <h4><a href="#">Apple</a></h4>
-                                        <p><a href="#">Apple MacBook Pro13.3″ Laptop with Touch ID </a></p>
-                                        <span class="price">
-                                            <ins>
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>471.48
-                                                    </bdi>
-                                                </span>
-                                            </ins>
-                                            <del aria-hidden="true">
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>904.21
-                                                    </bdi>
-                                                </span>
-                                            </del>
-                                        </span>
-                                        <div class="add-cart-area">
-                                            <button class="add-to-cart">Add to cart</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
