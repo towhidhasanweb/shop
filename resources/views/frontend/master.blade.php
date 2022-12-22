@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>Stowaa -  Ecommerce HTML Template</title>
@@ -103,7 +104,7 @@
                             <form action="#">
                                 <div class="advance_serach">
                                     <div class="select_option mb-0 clearfix">
-                                        <select>
+                                        <select class="select">
                                             <option data-display="All Categories">Select A Category</option>
                                             @foreach (App\Models\Category::all() as $category)
                                                 <option value="{{$category->id}}">{{$category->category_name}}</option>
@@ -185,7 +186,19 @@
                         <div class="col col-md-3">
                             <ul class="header_icons_group ul_li_right">
                                  <li>
-                                    <a href="#">Jon Doe</a>
+                                    @auth('customerlogin')
+                                    <div class="dropdown">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> {{Auth::guard('customerlogin')->user()->name}}</a>
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                                        <li><a class="dropdown-item" href="{{route('user.logout')}}">Logout</a></li>
+                                        </ul>
+                                        </div>
+                                    
+                                    @else
+                                    <a href="{{route('customer.login')}}">Login/register</a>
+                                    @endauth
                                 </li>
                                 
                                 <li>

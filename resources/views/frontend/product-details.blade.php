@@ -65,32 +65,32 @@
 
                                 <div class="item_attribute">
                                     <form action="#">
+                                        @if(App\Models\Inventory::where('product_id', $product_details->first()->id)->exists())
                                         <div class="row">
+                                            
                                             <div class="col col-md-6">
                                                 <div class="select_option clearfix">
-                                                    <h4 class="input_title">Size *</h4>
-                                                    <select>
-                                                        <option data-display="- Please select -">Choose A Option</option>
-                                                        <option value="1">Some option</option>
-                                                        <option value="2">Another option</option>
-                                                        <option value="3" disabled>A disabled option</option>
-                                                        <option value="4">Potato</option>
+                                                    <h4 class="input_title">Color *</h4>
+                                                    <select class="form-control" id="color_id">
+                                                        <option value="">Choose A Color</option>
+                                                        @foreach($all_colors as $colors)
+                                                            <option value="{{$colors->color_id}}">{{$colors->rel_to_color->color_name}}</option>
+                                                        @endforeach
+                                                        
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col col-md-6">
                                                 <div class="select_option clearfix">
-                                                    <h4 class="input_title">Color *</h4>
-                                                    <select>
-                                                        <option data-display="- Please select -">Choose A Option</option>
-                                                        <option value="1">Some option</option>
-                                                        <option value="2">Another option</option>
-                                                        <option value="3" disabled>A disabled option</option>
-                                                        <option value="4">Potato</option>
+                                                    <h4 class="input_title">Size *</h4>
+                                                    <select class="form-control" id="size_id">
+                                                        <option data-display="- Please select -">Choose A color</option>
+                                                        
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
 
                                     <div class="quantity_wrap">
@@ -273,14 +273,14 @@
                                     <div class="view-all"><a href="#">View all<i class="fal fa-long-arrow-right"></i></a></div>
                                 </div>
                                 <div class="product-area clearfix">
-                                    @foreach($related_product as $related)
+                                    @forelse($related_product as $related)
                                     <div class="grid">
                                         <div class="product-pic">
                                             <img src="{{asset('upload/product/thumbnails')}}/{{$related->thumbnails}}" alt>
 
                                         </div>
                                         <div class="details">
-                                            <h4><a href="#">{{$related->product_name}}</a></h4>
+                                            <h4><a href="{{route('product.details', $related->slug)}}">{{$related->product_name}}</a></h4>
                                             <p><a href="#">{{$related->short_desc}}</a></p>
                                             <div class="rating">
                                                 <i class="fas fa-star"></i>
@@ -303,7 +303,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @endforeach
+                                    @empty
+                                    <h3>No related product found</h3>
+                                    @endforelse
                                 </div>
                             </div>        
                         </div>
@@ -315,4 +317,27 @@
 
 
 
+@endsection
+@section('footer_script')
+    <script>
+        $('#color_id').change(function(){
+            var color_id = $(this).val();
+            var product_id = "{{$product_details->first()->id}}";
+            
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type:'POST',
+                url:'/getsizeid',
+                data:{'color_id': color_id, 'product_id': product_id},
+                success: function(data){
+                    $('#size_id').html(data);
+                }
+            });
+        });
+    </script>
 @endsection

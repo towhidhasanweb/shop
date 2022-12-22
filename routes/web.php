@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\customerRegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontendcontroller;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\UserController;
+use App\Models\customerRegister;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,3 +74,11 @@ Route::post('/edit-inventory-store', [ProductController::class, 'edit_inventory_
 // Frontend 
 Route::get('/home', [Frontendcontroller::class, 'frontend_view'])->name('index');
 Route::get('/product/details/{product_slug}', [Frontendcontroller::class, 'product_details'])->name('product.details');
+Route::post('/getsizeid', [Frontendcontroller::class, 'getsizeid']);
+
+
+// login
+Route::get('/login', [Frontendcontroller::class, 'customer_login'])->name('customer.login');
+Route::post('/customer-register', [customerRegisterController::class, 'customer_register'])->name('customer.register');
+Route::post('/login-customer', [customerRegisterController::class, 'login_customer'])->name('login.customer');
+Route::get('/logout', [customerRegisterController::class, 'user_logout'])->name('user.logout');
